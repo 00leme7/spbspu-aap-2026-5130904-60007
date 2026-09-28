@@ -2,6 +2,6 @@
 
 int main()
 {
-    std::cout << "devret.sinan\n";
-    return 0;
+  std::cout << "devret.sinan\n";
+  return 0;
 }
