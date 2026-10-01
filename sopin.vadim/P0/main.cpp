@@ -2,6 +2,6 @@
 
 int main()
 {
-    std::cout << "sopin.vadim\n";
-    return 0;
+  std::cout << "sopin.vadim\n";
+  return 0;
 }
