@@ -1,6 +1,6 @@
 #include "iostream"
 
-int main() 
+int main()
 {
   std::cout << "boiko.mikhail" << "\n";
   return 0;
