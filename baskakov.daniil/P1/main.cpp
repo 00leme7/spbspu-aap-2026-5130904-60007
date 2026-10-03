@@ -2,12 +2,14 @@
 #include <cstddef>
 
 namespace baskakov {
+  constexpr int err_no_data = 2;
+  constexpr std::size_t window = 3;
   struct Result {
     int value;
     int status;
   };
 
-  Result count_local_min()
+  Result countLocalMin()
   {
     int prev = 0;
     int curr = 0;
@@ -17,7 +19,7 @@ namespace baskakov {
 
     while (std::cin >> next && next != 0) {
       ++total;
-      if (total >= 3) {
+      if (total >= window) {
         if (curr < next && curr < prev) {
           ++cnt;
         }
@@ -31,7 +33,7 @@ namespace baskakov {
     }
 
     if (total == 0) {
-      return {0, 2};
+      return {0, err_no_data};
     }
 
     return {cnt, 0};
@@ -40,16 +42,16 @@ namespace baskakov {
 
 int main()
 {
-  baskakov::Result res = baskakov::count_local_min();
+  const baskakov::Result res = baskakov::countLocalMin();
 
   if (res.status == 1) {
     std::cerr << "Invalid input\n";
     return 1;
   }
 
-  if (res.status == 2) {
+  if (res.status == baskakov::err_no_data) {
     std::cerr << "No data\n";
-    return 2;
+    return baskakov::err_no_data;
   }
 
   std::cout << res.value << "\n";
