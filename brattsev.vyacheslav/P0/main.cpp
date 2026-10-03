@@ -2,6 +2,6 @@
 
 int main()
 {
- std::cout << "brattsev.vyacheslav";
- return 0;
+  std::cout << "brattsev.vyacheslav";
+  return 0;
 }
