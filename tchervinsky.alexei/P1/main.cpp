@@ -27,6 +27,6 @@ int main()
     return ERROR_NOT_ENOUGH_DATA;
   }
 
-  std::cout << (sum / static_cast<double>(count)) << '\n';
+  std::cout << (sum / static_cast< double >(count)) << '\n';
   return 0;
 }
