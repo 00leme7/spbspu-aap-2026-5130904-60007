@@ -16,24 +16,26 @@ int main()
   int sum {0};
   std::size_t count {0};
 
-// thanks Daniil Baskakov for while loop
+// correct while loop
+
   while ((std::cin >> a) && (a != 0))
   {
     ++count;
     sum += a;
   }
+
 // end of while due to
 // 1. input error, e.g not an integer
 // 2. zero entered end of the sequence
 
-// check cin state after reading
+// check cin state after reading (1. above)
   if (!std::cin)
   {
     std::cerr << "Incorrect input" << '\n';
     return 1;
   }
 
-// here we are when zero is read
+// here we are when zero is read (2. above)
 // so final calculation
   if (count == 0)
   {
