@@ -20,19 +20,31 @@ struct SequenceTracker
     {
       first_max = value;
       has_first = true;
-      return;
     }
-
-    if (value > first_max)
+    else if (!has_second)
     {
-      second_max = first_max;
-      first_max = value;
+      if (value > first_max)
+      {
+        second_max = first_max;
+        first_max = value;
+      }
+      else
+      {
+        second_max = value;
+      }
       has_second = true;
     }
-    else if (!has_second || value > second_max)
+    else
     {
-      second_max = value;
-      has_second = true;
+      if (value > first_max)
+      {
+        second_max = first_max;
+        first_max = value;
+      }
+      else if (value > second_max)
+      {
+        second_max = value;
+      }
     }
   }
 
@@ -43,7 +55,7 @@ struct SequenceTracker
 
   int getResult() const
   {
-    return second_max;
+    return first_max - second_max;
   }
 };
 
@@ -52,12 +64,8 @@ int main()
   int value = 0;
   SequenceTracker tracker;
 
-  while (std::cin >> value)
+  while ((std::cin >> value) && (value != 0))
   {
-    if (value == 0)
-    {
-      break;
-    }
     tracker.process(value);
   }
 
@@ -76,4 +84,3 @@ int main()
   std::cout << tracker.getResult() << "\n";
   return 0;
 }
-
