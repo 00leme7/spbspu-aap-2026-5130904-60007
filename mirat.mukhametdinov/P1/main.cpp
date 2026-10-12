@@ -2,7 +2,7 @@
 
 int main()
 {
-  int n;
+  int n = 0;
   std::cin >> n;
   if (!std::cin)
   {
