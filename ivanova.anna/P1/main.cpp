@@ -3,10 +3,11 @@
 
 #define ERROR_NOT_ENOUGH_DATA 2
 
-int main() {
+int main()
+{
   long long a = 0;
-  long long max1 = std::numeric_limits<long long>::min();
-  long long max2 = std::numeric_limits<long long>::min();
+  long long max1 = std::numeric_limits < long long > ::min();
+  long long max2 = std::numeric_limits < long long > ::min();
 
   int count = 0;
 
@@ -26,7 +27,7 @@ int main() {
     return 1;
   }
 
-  if (count < 2 || max2 == std::numeric_limits<long long>::min()) {
+  if (count < 2 || max2 == std::numeric_limits < long long > ::min()) {
     std::cerr << "Not enough data" << '\n';
     return ERROR_NOT_ENOUGH_DATA;
   }
