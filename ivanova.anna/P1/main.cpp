@@ -5,7 +5,7 @@
 
 int main()
 {
-  long long a;
+  long long a = 0;
   long long max1 = std::numeric_limits<long long>::min();
   long long max2 = std::numeric_limits<long long>::min();
 
@@ -40,5 +40,3 @@ int main()
   std::cout << max2 << '\n';
   return 0;
 }
-
-
