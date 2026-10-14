@@ -1,49 +1,27 @@
 #include <iostream>
-#include <limits>
 
 int main()
 {
-  const int error_code_overflow = 2;
+  int prev{0};
+  int cur{0};
+  bool is_first{true};
+  int count{0};
 
-  int prev = 0;
-  int cur = 0;
-  bool is_first = true;
-  unsigned long long count = 0;
-  bool overflow = false;
-
-  while (true)
+  while ((std::cin >> cur) && (cur != 0))
   {
-    if (!(std::cin >> cur))
+    if (!is_first && (cur > prev))
     {
-      std::cerr << "Error: input is not a sequence\n";
-      return 1;
-    }
-
-    if (cur == 0)
-    {
-      break;
-    }
-
-    if (!is_first && cur > prev)
-    {
-      if (count == std::numeric_limits< unsigned long long >::max())
-      {
-        overflow = true;
-      }
-      else
-      {
-        ++count;
-      }
+      ++count;
     }
 
     prev = cur;
     is_first = false;
   }
 
-  if (overflow)
+  if (!std::cin)
   {
-    std::cerr << "Error: sequence is too long\n";
-    return error_code_overflow;
+    std::cerr << "Incorrect input" << '\n';
+    return 1;
   }
 
   std::cout << count << '\n';
