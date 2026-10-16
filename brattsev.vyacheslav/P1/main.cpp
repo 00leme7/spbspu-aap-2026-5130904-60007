@@ -27,11 +27,13 @@ int main()
     }
     else
     {
+      // clang-format off
       if ((prev > 0 && current < 0) ||
         (prev < 0 && current > 0))
       {
         changes++;
       }
+      // clang-format on
       prev = current;
     }
   }
