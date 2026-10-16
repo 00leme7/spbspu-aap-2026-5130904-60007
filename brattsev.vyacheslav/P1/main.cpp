@@ -1,35 +1,34 @@
 ﻿#include <iostream>
 
 int main() {
-long long p = 0;
-long long cur = 0;
-long long changes = 0;
-bool is_first = true;
+  long long prev = 0;
+  long long current = 0;
+  long long changes = 0;
+  bool is_first = true;
 
-while (true) {
-	if (!(std::cin >> cur)) {
-		std::cerr << "ошибка\n";
-		return 1;
-	}
+  while (true) {
+    if (!(std::cin >> current)) {
+      std::cerr << "ошибка\n";
+      return 1;
+    }
 
-	if (cur == 0) {
-		break;
-	}
+    if (current == 0) {
+      break;
+    }
 
-	if (is_first) {
-		p = cur;
-		is_first = false;
-	}
-	else {
-		if ((p > 0 && cur < 0)
-			|| (p < 0 && cur > 0)) {
-			changes++;
-		}
-		p = cur;
-	}
-}
+    if (is_first) {
+      prev = current;
+      is_first = false;
+    }
+    else {
+      if ((prev > 0 && current < 0) ||
+        (prev < 0 && current > 0)) {
+        changes++;
+      }
+      prev = current;
+    }
+  }
 
-std::cout << changes << "\n";
-
-return 0;
+  std::cout << changes << "\n";
+  return 0;
 }
