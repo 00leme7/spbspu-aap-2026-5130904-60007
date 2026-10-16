@@ -8,7 +8,7 @@ int main() {
 
   while (true) {
     if (!(std::cin >> current)) {
-      std::cerr << "ошибка: входные данные не являются последовательностью целых чисел\n";
+      std::cerr << "ошибка\n";
       return 1;
     }
 
