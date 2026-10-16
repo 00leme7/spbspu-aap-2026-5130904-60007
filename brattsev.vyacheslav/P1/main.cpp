@@ -13,6 +13,7 @@ int main() {
     }
 
 
+
     if (current == 0) {
       break;
     }
