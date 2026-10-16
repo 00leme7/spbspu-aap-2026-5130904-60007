@@ -27,8 +27,8 @@ int main()
     }
     else
     {
-      if ((prev > 0 && current < 0)
-        || (prev < 0 && current > 0))
+      if ((prev > 0 && current < 0) ||
+        (prev < 0 && current > 0))
       {
         changes++;
       }
