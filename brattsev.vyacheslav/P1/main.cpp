@@ -20,7 +20,8 @@ while (true) {
     p = cur;
     is_first = false;
   } else {
-    if ((p > 0 && cur < 0) || (p < 0 && cur > 0)) {
+    if ((p > 0 && cur < 0) 
+      || (p < 0 && cur > 0)) {
       changes++;
     }
     p = cur;
