@@ -2,7 +2,7 @@
 #include <cstddef>
 int main()
 {
-  int x;
+  int x{0};
   int cur{0};
   int mx{0};
   int count{0};
@@ -26,7 +26,7 @@ int main()
       {
         mx = cur;
       }
-    cur = 0;
+      cur = 0;
     }
   }
   if (std::cin.fail() && !std::cin.eof())
