@@ -1,9 +1,8 @@
 #include <iostream>
 #include <new>
 
-namespace baskakov
-{
-  char* replaceSymbol(char* dest, const char* src, char oldChar, char newChar) noexcept
+namespace baskakov {
+  char* replaceSymbol(char* dest, const char* src, char old_char, char new_char) noexcept
   {
     if (dest == nullptr || src == nullptr) {
       return dest;
@@ -11,8 +10,8 @@ namespace baskakov
 
     char* target = dest;
     while (*src != '\0') {
-      if (*src == oldChar) {
-        *target = newChar;
+      if (*src == old_char) {
+        *target = new_char;
       } else {
         *target = *src;
       }
@@ -26,8 +25,11 @@ namespace baskakov
 
   size_t getLength(const char* str) noexcept
   {
+    if (str == nullptr) {
+      return 0;
+    }
     size_t length = 0;
-    while (str != nullptr && str[length] != '\0') {
+    while (str[length] != '\0') {
       ++length;
     }
     return length;
@@ -35,7 +37,8 @@ namespace baskakov
 
   char* readLine(std::istream& in)
   {
-    size_t capacity = 16;
+    constexpr size_t initial_capacity = 16;
+    size_t capacity = initial_capacity;
     size_t size = 0;
     char* buffer = new char[capacity];
 
@@ -46,16 +49,22 @@ namespace baskakov
       }
 
       if (size + 1 >= capacity) {
-        size_t newCapacity = capacity * 2;
-        char* newBuffer = new char[newCapacity];
+        const size_t new_capacity = capacity * 2;
+        char* new_buffer = nullptr;
+        try {
+          new_buffer = new char[new_capacity];
+        } catch (...) {
+          delete[] buffer;
+          throw;
+        }
 
         for (size_t i = 0; i < size; ++i) {
-          newBuffer[i] = buffer[i];
+          new_buffer[i] = buffer[i];
         }
 
         delete[] buffer;
-        buffer = newBuffer;
-        capacity = newCapacity;
+        buffer = new_buffer;
+        capacity = new_capacity;
       }
 
       buffer[size++] = ch;
@@ -68,29 +77,35 @@ namespace baskakov
 
 int main()
 {
-  const char targetChar = 'c';
-  const char replacementChar = 'b';
+  const char target_char = 'c';
+  const char replacement_char = 'b';
 
-  char* inputStr = nullptr;
-  char* resultStr = nullptr;
+  char* input_str = nullptr;
+  char* result_str = nullptr;
 
   try {
-    inputStr = baskakov::readLine(std::cin);
+    input_str = baskakov::readLine(std::cin);
 
-    size_t length = baskakov::getLength(inputStr);
-    resultStr = new char[length + 1];
+    if (input_str[0] == '\0') {
+      delete[] input_str;
+      std::cerr << "Empty input\n";
+      return 1;
+    }
 
-    baskakov::replaceSymbol(resultStr, inputStr, targetChar, replacementChar);
+    const size_t length = baskakov::getLength(input_str);
+    result_str = new char[length + 1];
 
-    std::cout << resultStr << '\n';
+    baskakov::replaceSymbol(result_str, input_str, target_char, replacement_char);
 
-    delete[] inputStr;
-    delete[] resultStr;
+    std::cout << result_str << '\n';
+
+    delete[] input_str;
+    delete[] result_str;
     return 0;
   } catch (const std::bad_alloc&) {
-    delete[] inputStr;
-    delete[] resultStr;
-    std::cerr << "Error: Unable to allocate dynamic memory\n";
+    delete[] input_str;
+    delete[] result_str;
+    std::cerr << "Unable to allocate dynamic memory\n";
     return 1;
   }
 }
