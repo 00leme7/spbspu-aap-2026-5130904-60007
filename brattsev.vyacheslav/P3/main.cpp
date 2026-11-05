@@ -106,7 +106,9 @@ int main(int argc, char* argv[])
     return 2;
   }
 
-  const long long total_elements = static_cast<long long>(rows) * cols;
+  const long long total_elements =
+      static_cast<long long>(rows) * static_cast<long long>(cols);
+
   if (total_elements > brattsev::MAX_ELEMENTS)
   {
     std::cerr << "error\n";
