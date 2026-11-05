@@ -7,7 +7,7 @@ namespace brattsev
   constexpr int MAX_ELEMENTS = 2147483647;
   constexpr int MAX_STACK_SIZE = 10000;
 
-  bool parse_num_arg(const std::string& arg, int& num)
+  bool parseNumArg(const std::string& arg, int& num)
   {
     if (arg == "1")
     {
@@ -22,7 +22,7 @@ namespace brattsev
     return false;
   }
 
-  bool read_matrix(std::ifstream& fin, int* matrix, int rows, int cols)
+  bool readMatrix(std::ifstream& fin, int* matrix, int rows, int cols)
   {
     for (int i = 0; i < rows; ++i)
     {
@@ -37,7 +37,7 @@ namespace brattsev
     return true;
   }
 
-  bool is_upper_triangular(const int* matrix, int rows, int cols)
+  bool isUpperTriangular(const int* matrix, int rows, int cols)
   {
     if (rows <= 0 || cols <= 0)
     {
@@ -56,7 +56,7 @@ namespace brattsev
     return true;
   }
 
-  void write_result(const std::string& filename, bool result)
+  void writeResult(const std::string& filename, bool result)
   {
     std::ofstream fout(filename);
     if (fout.is_open())
@@ -82,14 +82,14 @@ int main(int argc, char* argv[])
   }
 
   int num = 0;
-  if (!brattsev::parse_num_arg(argv[1], num))
+  if (!brattsev::parseNumArg(argv[1], num))
   {
     std::cerr << "error\n";
     return 1;
   }
 
-  std::string input_file = argv[2];
-  std::string output_file = argv[3];
+  const std::string input_file = argv[2];
+  const std::string output_file = argv[3];
 
   std::ifstream fin(input_file);
   if (!fin.is_open())
@@ -131,7 +131,7 @@ int main(int argc, char* argv[])
     matrix = new int[total_elements];
   }
 
-  if (!brattsev::read_matrix(fin, matrix, rows, cols))
+  if (!brattsev::readMatrix(fin, matrix, rows, cols))
   {
     if (num == 2)
     {
@@ -141,13 +141,14 @@ int main(int argc, char* argv[])
     return 2;
   }
 
-  const bool is_upper = brattsev::is_upper_triangular(matrix, rows, cols);
+  const bool is_upper = brattsev::isUpperTriangular(matrix, rows, cols);
 
-  brattsev::write_result(output_file, is_upper);
+  brattsev::writeResult(output_file, is_upper);
 
   if (num == 2)
   {
     delete[] matrix;
   }
+
   return 0;
 }
