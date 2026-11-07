@@ -5,10 +5,10 @@
 #include <new>
 
 namespace semenov {
-  char* readLine(size_t* length)
+  char* readLine(size_t* const length)
   {
-    const size_t initialLength = 10;
-    size_t len = initialLength;
+    const size_t initial_length = 10;
+    size_t len = initial_length;
     size_t size = 0;
     char* buffer1 = new char[len];
 
@@ -20,10 +20,10 @@ namespace semenov {
             throw std::bad_alloc();
           }
           len *= 2;
-          char* newBuffer = new char[len];
-          std::copy(buffer1, buffer1 + size, newBuffer);
+          char* const new_buffer = new char[len];
+          std::copy(buffer1, buffer1 + size, new_buffer);
           delete[] buffer1;
-          buffer1 = newBuffer;
+          buffer1 = new_buffer;
         }
         buffer1[size++] = c;
       }
@@ -36,12 +36,12 @@ namespace semenov {
     return buffer1;
   }
 
-  char* fetchlitters(const char* line1, const char* line2, char* result) noexcept
+  char* fetchlitters(const char* const line1, const char* const line2, char* const result) noexcept
   {
     int amount = 0;
     bool found = false;
     for (size_t i = 0; line1[i] != '\0'; ++i) {
-      char c = static_cast< char >(std::tolower(static_cast< unsigned char >(line1[i])));
+      const char c = static_cast< char >(std::tolower(static_cast< unsigned char >(line1[i])));
       if (c < 'a' || c > 'z') {
         continue;
       }
@@ -57,7 +57,7 @@ namespace semenov {
       }
     }
     for (size_t j = 0; line2[j] != '\0'; ++j) {
-      char c = static_cast< char >(std::tolower(static_cast< unsigned char >(line2[j])));
+      const char c = static_cast< char >(std::tolower(static_cast< unsigned char >(line2[j])));
       if (c < 'a' || c > 'z') {
         continue;
       }
@@ -81,12 +81,18 @@ namespace semenov {
 int main()
 {
   size_t length1 = 0;
-  char* line1 = nullptr;
-  const char* line2 = "def ghk";
-  char result[28] = {};
+  const char* line1 = nullptr;
+  const char* const line2 = "def ghk";
+  const size_t result_size = 28;
+  char result[result_size] = {};
 
   try {
     line1 = semenov::readLine(&length1);
+    if (std::cin.bad() || (std::cin.fail() && length1 == 0)) {
+      delete[] line1;
+      std::cerr << "No input or input error\n";
+      return 1;
+    }
     std::cout << semenov::fetchlitters(line1, line2, result) << "\n";
   } catch (const std::bad_alloc&) {
     delete[] line1;
