@@ -2,7 +2,8 @@
 #include <fstream>
 #include <cstring>
 
-namespace hounnou {
+namespace hounnou
+{
   int processMatrix(int argc, char* argv[])
   {
     if (argc != 4)
