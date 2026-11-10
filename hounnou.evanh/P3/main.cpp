@@ -54,12 +54,13 @@ namespace hounnou {
       return 0;
     }
 
+    const int MAX_ELEMENTS = 10000;
     int* matrix{nullptr};
-    int fixed_matrix[10000];
+    int fixed_matrix[MAX_ELEMENTS];
 
     if (num == 1)
     {
-      if (rows * cols > 10000)
+      if (rows * cols > MAX_ELEMENTS)
       {
         std::cerr << "Matrix too large for fixed size" << '\n';
         return 2;
