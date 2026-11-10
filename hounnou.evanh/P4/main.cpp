@@ -1,6 +1,7 @@
 #include <iostream>
 
-namespace hounnou {
+namespace hounnou
+{
   int hasRepeatingChars(const char* str)
   {
     bool seen[256] = {false};
