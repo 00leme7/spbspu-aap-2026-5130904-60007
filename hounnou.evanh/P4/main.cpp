@@ -2,13 +2,15 @@
 
 namespace hounnou
 {
+  const int MAX_CHARS = 256;
+
   int hasRepeatingChars(const char* str)
   {
-    bool seen[256] = {false};
+    bool seen[MAX_CHARS] = {false};
 
     for (int i = 0; str[i] != '\0'; ++i)
     {
-      unsigned char c = static_cast<unsigned char>(str[i]);
+      const unsigned char c = static_cast<unsigned char>(str[i]);
       if (seen[c])
       {
         return 1;
@@ -31,7 +33,7 @@ int main()
     return 1;
   }
 
-  int result = hounnou::hasRepeatingChars(input);
+  const int result = hounnou::hasRepeatingChars(input);
   std::cout << result << '\n';
 
   return 0;
