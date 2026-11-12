@@ -10,7 +10,7 @@ namespace hounnou
 
     for (int i = 0; str[i] != '\0'; ++i)
     {
-      const unsigned char c = static_cast<unsigned char>(str[i]);
+      const unsigned char c = static_cast< unsigned char >(str[i]);
       if (seen[c])
       {
         return 1;
